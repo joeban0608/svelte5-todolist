@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import type { PageServerData } from './$types';
+
 	let { data }: { data: PageServerData } = $props();
 </script>
 
@@ -23,7 +25,7 @@
 				</svg>
 			</div>
 			<ul class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-				<!-- <li><a href="/">Todo list</a></li> -->
+				<li><a href="/">Todo list</a></li>
 				<li>
 					<a href="/drizzle-relation">Drizzle Relation Example</a>
 					<ul class="p-2">
@@ -33,7 +35,7 @@
 				</li>
 			</ul>
 		</div>
-		<span class="ml-4 text-xl">{data.user?.username}</span>
+		<span class="ml-4 text-xl">{data.user.username}</span>
 	</div>
 	<div class="navbar-center hidden lg:flex">
 		<ul class="menu menu-horizontal px-1">
@@ -55,27 +57,5 @@
 		</form>
 	</div>
 </nav>
-<h1 class="p-6 pb-0 text-center text-4xl tracking-widest">To do List</h1>
-<main class="flex flex-col items-center justify-center p-6">
-	<form method="post" action="?/create" class="flex w-full flex-col gap-4">
-		<input class="w-full" name="text" />
-		<button class="btn btn-outline w-1/4">Add</button>
-	</form>
-	<ul class="flex w-full flex-col">
-		{#each data.todos as todo}
-			<li class="my-4 flex w-full items-center justify-between gap-4 border p-4">
-				<form method="post" action="?/updated" class="flex w-full justify-between">
-					<input type="hidden" name="id" value={todo.id} />
-					<input name="text" bind:value={todo.text} />
-					<button class="btn btn-outline">Update</button>
-				</form>
-				<div class="flex gap-4">
-					<form method="post" action="?/delete">
-						<input type="hidden" name="id" value={todo.id} />
-						<button class="btn btn-error">Delete</button>
-					</form>
-				</div>
-			</li>
-		{/each}
-	</ul>
-</main>
+<h1>Hi, {data.user.username}!</h1>
+<p>Your user ID is {data.user.id}.</p>

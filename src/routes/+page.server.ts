@@ -1,26 +1,37 @@
-import { error, type Actions } from '@sveltejs/kit';
+import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { db } from '$lib/server/db';
 import { todo } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
-import { updated } from '$app/stores';
+import * as auth from '$lib/server/auth';
 
-export const load = (async () => {
+export const load = (async (event) => {
 	const todos = await db.select().from(todo);
-
+	if (!event.locals.user) {
+		return redirect(302, '/demo/lucia/login');
+	}
 	if (!todos?.length) {
 		return {
 			todos: []
 		};
 		// error(404, 'todo not found');
 	}
-	console.log('todos', todos);
 	return {
+		user: event.locals.user,
 		todos
 	};
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
+	logout: async (event) => {
+		if (!event.locals.session) {
+			return fail(401);
+		}
+		await auth.invalidateSession(event.locals.session.id);
+		auth.deleteSessionTokenCookie(event);
+
+		return redirect(302, '/demo/lucia/login');
+	},
 	create: async ({ cookies, request }) => {
 		const data = await request.formData();
 		const text = data.get('text');
