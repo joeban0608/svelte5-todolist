@@ -2,14 +2,16 @@ import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { db } from '$lib/server/db';
 import { todo } from '$lib/server/db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, and } from 'drizzle-orm';
 import * as auth from '$lib/server/auth';
 
 export const load = (async (event) => {
-	const todos = await db.select().from(todo);
 	if (!event.locals.user) {
 		return redirect(302, '/demo/lucia/login');
 	}
+	const userId = event.locals.user.id;
+	const todos = await db.select().from(todo).where(eq(todo.userId, userId));
+
 	if (!todos?.length) {
 		return {
 			todos: []
@@ -35,8 +37,9 @@ export const actions: Actions = {
 	create: async ({ cookies, request }) => {
 		const data = await request.formData();
 		const text = data.get('text');
-		if (typeof text === 'string') {
-			await db.insert(todo).values({ text });
+		const userId = data.get('userId');
+		if (typeof text === 'string' && typeof userId === 'string') {
+			await db.insert(todo).values({ text, userId });
 		} else {
 			throw error(400, 'Invalid text value for create');
 		}
@@ -44,8 +47,13 @@ export const actions: Actions = {
 	delete: async ({ cookies, request }) => {
 		const data = await request.formData();
 		const id = data.get('id');
+		const userId = data.get('userId');
+
 		if (!id) {
-			throw error(400, 'Invalid id value for delete');
+			throw error(400, 'Invalid todo id for delete');
+		}
+		if (!userId) {
+			throw error(400, 'Invalid user id for delete');
 		}
 		await db.delete(todo).where(eq(todo.id, Number(id)));
 	},
@@ -53,12 +61,21 @@ export const actions: Actions = {
 		const data = await request.formData();
 		const id = data.get('id');
 		const text = data.get('text');
-		if (!id || !text) {
-			throw error(400, 'Invalid id or text for update');
+		const userId = data.get('userId');
+
+		if (!id) {
+			throw error(400, 'Invalid todo id for update');
 		}
+		if (!text) {
+			throw error(400, 'Invalid todo text for update');
+		}
+		if (!userId) {
+			throw error(400, 'Invalid userId text for update');
+		}
+
 		await db
 			.update(todo)
 			.set({ text: String(text) })
-			.where(eq(todo.id, Number(id)));
+			.where(and(eq(todo.id, Number(id)), eq(todo.userId, String(userId))));
 	}
 };
