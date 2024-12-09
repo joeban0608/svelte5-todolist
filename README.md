@@ -1,5 +1,29 @@
 # sv
 
+## 啟動 todo 專案
+
+```bash
+# new bash
+npm run dev
+```
+
+```bash
+# new bash
+npm run db:start
+```
+
+```bash
+npm run db:push
+```
+
+```bash
+# new bash
+npm run db:studio
+```
+
+
+---
+
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
 ## Creating a project
