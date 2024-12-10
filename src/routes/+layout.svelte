@@ -16,7 +16,8 @@
 		'/drizzle-query/include-relations',
 		'/drizzle-query/partial-fields-select',
 		'/drizzle-query/nested-partial-fields-select',
-		'/drizzle-query/select-filters'
+		'/drizzle-query/select-filters',
+		'/drizzle-query/limit--offset'
 	];
 
 	const hidden = $derived(pageRoute === '/demo/lucia/login');
