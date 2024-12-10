@@ -12,7 +12,7 @@
 	<div class="mockup-code">
 		<pre><code
 				>{`
-	// src/routes/drizzle-query/${exampleName}/+page.svelte
+	// src/routes/drizzle-query/${exampleName}/+page.server.ts
 
 	const result = await globalDb.query.user.findMany({
 		with: {
