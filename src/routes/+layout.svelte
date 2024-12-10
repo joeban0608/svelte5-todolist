@@ -9,7 +9,8 @@
 		'/drizzle-query/find-first',
 		'/drizzle-query/find-many',
 		'/drizzle-query/include-relations',
-		'/drizzle-query/partial-fields-select'
+		'/drizzle-query/partial-fields-select',
+		'/drizzle-query/nested-partial-fields-select',
 	];
 </script>
 

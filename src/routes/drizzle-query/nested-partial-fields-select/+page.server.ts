@@ -10,31 +10,18 @@ export const load = (async (event) => {
 	try {
 		const result = await globalDb.query.user.findMany({
 			columns: {
-				id: true,
-				username: true
-			},
-			with: {
-				todo: true
-			}
-		});
-		const result2 = await globalDb.query.user.findMany({
-			columns: {
 				passwordHash: false
 			},
 			with: {
-				todo: true
-			}
-		});
-		const result3 = await globalDb.query.user.findMany({
-			columns: {},
-			with: {
-				todo: true
+				todo: {
+					columns: {
+						userId: false
+					}
+				}
 			}
 		});
 		return {
-			users: result,
-			users2: result2,
-			users3: result3
+			users: result
 		};
 	} catch (error) {
 		console.error('error', error);
