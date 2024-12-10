@@ -3,7 +3,7 @@
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
-	const exampleName = 'find-many';
+	const exampleName = 'include-relations';
 </script>
 
 <div class="flex flex-col gap-4 p-4">
@@ -13,7 +13,12 @@
 		<pre><code
 				>{`
 	// src/routes/drizzle-query/${exampleName}/+page.svelte
-	const result = await globalDb.query.user.findMany()
+
+	const result = await globalDb.query.user.findMany({
+		with: {
+			todo: true
+		}
+	});
 
   --------------------------------------------------
 

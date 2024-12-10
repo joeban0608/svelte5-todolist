@@ -2,26 +2,20 @@
 	import type { Snippet } from 'svelte';
 	import '../app.css';
 	import type { LayoutData } from './$types';
+	import { firstWordUpperCaseAndJoinSpace } from '$lib/func/handleString';
 
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 	const drizzleLinks = [
 		'/drizzle-query/find-first',
 		'/drizzle-query/find-many',
-		'/drizzle-query/one-to-one'
+		'/drizzle-query/include-relations'
 	];
 </script>
 
 {#snippet drizzleLinkShadow(drizzleLinks: string[])}
 	{#each drizzleLinks as link}
 		<li>
-			<a href={link}
-				>{(link ?? '')
-					.split('/')
-					.pop()
-					?.split('-')
-					.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-					.join(' ')}</a
-			>
+			<a href={link}>{firstWordUpperCaseAndJoinSpace(link)}</a>
 		</li>
 	{/each}
 {/snippet}
