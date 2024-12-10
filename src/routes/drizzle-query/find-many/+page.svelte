@@ -17,7 +17,7 @@
 
   --------------------------------------------------
 
-	// server response data: { users: UserWithTodo[] }
+	// server response data: { users: User[] }
 ${JSON.stringify(data.users ? data.users : data.error, null, 4)}
 `}</code
 			></pre>

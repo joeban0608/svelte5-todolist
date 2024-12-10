@@ -21,7 +21,7 @@
 
   --------------------------------------------------
 
-	// server response data: { user: User }
+	// server response data: { users: UserWithTodo[] }
 ${JSON.stringify(data.filterUserWithTodo ? data.filterUserWithTodo : data.error, null, 4)}
 `}</code
 			></pre>

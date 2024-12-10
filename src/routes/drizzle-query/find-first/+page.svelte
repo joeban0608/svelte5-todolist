@@ -17,7 +17,7 @@
 
   --------------------------------------------------
 
-	// server response data: { user: UserWithTodo }
+	// server response data: { user: User }
 ${JSON.stringify(data.user ? data.user : data.error, null, 4)}
 `}</code
 			></pre>
