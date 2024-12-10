@@ -7,34 +7,26 @@ export const load = (async (event) => {
 	if (!event.locals.user) {
 		return redirect(302, '/demo/lucia/login');
 	}
+	const userId = event.locals.user.id;
 	try {
-		const columnsKeyTrue = await globalDb.query.user.findMany({
-			columns: {
-				id: true,
-				username: true
-			},
+		const filterUserWithTodo = await globalDb.query.user.findMany({
+			where: (user, { eq }) => eq(user.id, userId),
 			with: {
 				todo: true
 			}
 		});
-		const columnsKeyFalse = await globalDb.query.user.findMany({
-			columns: {
-				passwordHash: false
-			},
+		const filterTodoGreaterThan_3 = await globalDb.query.user.findMany({
+			where: (user, { eq }) => eq(user.id, userId),
 			with: {
-				todo: true
+				todo: {
+					where: (todo, { gte }) => gte(todo.id, 4)
+				}
 			}
 		});
-		const columnsNoKey = await globalDb.query.user.findMany({
-			columns: {},
-			with: {
-				todo: true
-			}
-		});
+
 		return {
-			users: columnsKeyTrue,
-			users2: columnsKeyFalse,
-			users3: columnsNoKey
+			filterUserWithTodo: filterUserWithTodo,
+			filterUserTodoGte3: filterTodoGreaterThan_3
 		};
 	} catch (error) {
 		console.error('error', error);

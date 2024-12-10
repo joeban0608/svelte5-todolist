@@ -11,6 +11,7 @@
 		'/drizzle-query/include-relations',
 		'/drizzle-query/partial-fields-select',
 		'/drizzle-query/nested-partial-fields-select',
+		'/drizzle-query/select-filters'
 	];
 </script>
 
@@ -58,7 +59,7 @@
 			<span class="ml-4 text-xl">{data?.user?.username}</span>
 		</div>
 		<div class="navbar-center hidden lg:flex">
-			<ul class="menu menu-horizontal px-1 z-10">
+			<ul class="menu menu-horizontal z-10 px-1">
 				<li><a href="/">Todo list</a></li>
 				<li>
 					<details>
