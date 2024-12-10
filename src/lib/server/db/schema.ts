@@ -1,10 +1,14 @@
-import { pgTable, text, timestamp, serial } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+import { pgTable, text, timestamp, serial, integer, type AnyPgColumn } from 'drizzle-orm/pg-core';
 
 export const user = pgTable('user', {
 	id: text('id').primaryKey(),
 	username: text('username').notNull().unique(),
 	passwordHash: text('password_hash').notNull()
 });
+export const usersRelations = relations(user, ({ one, many }) => ({
+	todo: many(todo)
+}));
 
 export const session = pgTable('session', {
 	id: text('id').primaryKey(),
@@ -24,6 +28,9 @@ export const todo = pgTable('todo', {
 		.notNull()
 		.references(() => user.id)
 });
+export const todoRelations = relations(todo, ({ one, many }) => ({
+	user: one(user, { fields: [todo.userId], references: [user.id] })
+}));
 
 export type InsertTodo = typeof todo.$inferInsert;
 export type SelectTodo = typeof todo.$inferSelect;

@@ -9,6 +9,7 @@ export const load = (async (event) => {
 	}
 	return { user: event.locals.user };
 }) satisfies PageServerLoad;
+
 export const actions: Actions = {
 	logout: async (event) => {
 		if (!event.locals.session) {
