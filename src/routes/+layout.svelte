@@ -8,7 +8,8 @@
 	const drizzleLinks = [
 		'/drizzle-query/find-first',
 		'/drizzle-query/find-many',
-		'/drizzle-query/include-relations'
+		'/drizzle-query/include-relations',
+		'/drizzle-query/partial-fields-select'
 	];
 </script>
 
@@ -56,7 +57,7 @@
 			<span class="ml-4 text-xl">{data?.user?.username}</span>
 		</div>
 		<div class="navbar-center hidden lg:flex">
-			<ul class="menu menu-horizontal px-1">
+			<ul class="menu menu-horizontal px-1 z-10">
 				<li><a href="/">Todo list</a></li>
 				<li>
 					<details>
