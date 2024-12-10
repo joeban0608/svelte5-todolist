@@ -8,20 +8,18 @@ export const load = (async (event) => {
 		return redirect(302, '/demo/lucia/login');
 	}
 	try {
-		const result = await globalDb.query.user.findMany({
+		const result = await globalDb.query.user.findFirst({
 			with: {
 				todo: true
 			}
 		});
 		return {
-			users: result
+			user: result
 		};
 	} catch (error) {
 		console.error('error', error);
 		return { error: 'query globalDb db was wrong.' };
 	}
-
-	// return {};
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {

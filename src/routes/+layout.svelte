@@ -4,19 +4,11 @@
 	import type { LayoutData } from './$types';
 
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
-	const drizzleLinks = ['/drizzle-relation/find-many', '/drizzle-relation/one-to-one'];
-	// const toUpperCaseWithSpaces = (str:string) =>
-	// 	str
-	// 		.split('-')
-	// 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-	// 		.join(' ');
-
-	// const transformedLinks = drizzleLinks.map((link) => {
-	// 	// 提取路径的最后一部分
-	// 	const lastSegment = link.split('/').pop();
-	// 	// 转换为首字母大写并用空格分隔
-	// 	return toUpperCaseWithSpaces(lastSegment);
-	// });
+	const drizzleLinks = [
+		'/drizzle-relation/find-first',
+		'/drizzle-relation/find-many',
+		'/drizzle-relation/one-to-one'
+	];
 </script>
 
 {#snippet drizzleLinkShadow(drizzleLinks: string[])}
@@ -57,8 +49,10 @@
 					class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
 				>
 					<li><a href="/">Todo list</a></li>
+					<li class="">
+						<summary class="hover:cursor-default hover:bg-inherit">Drizzle Relation</summary>
+					</li>
 					<li>
-						<!-- <a href="/drizzle-relation">Drizzle Relation Example</a> -->
 						<ul class="p-2">
 							{@render drizzleLinkShadow(drizzleLinks)}
 						</ul>
