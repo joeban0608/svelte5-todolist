@@ -3,7 +3,12 @@
 	import '../app.css';
 	import type { LayoutData } from './$types';
 	import { firstWordUpperCaseAndJoinSpace } from '$lib/func/handleString';
-
+	import { page } from '$app/stores';
+	let pageRoute = $state('');
+	page.subscribe((value) => {
+		// console.log(value);
+		pageRoute = value.route.id ?? '';
+	});
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 	const drizzleLinks = [
 		'/drizzle-query/find-first',
@@ -13,6 +18,8 @@
 		'/drizzle-query/nested-partial-fields-select',
 		'/drizzle-query/select-filters'
 	];
+
+	const hidden = $derived(pageRoute === '/demo/lucia/login');
 </script>
 
 {#snippet drizzleLinkShadow(drizzleLinks: string[])}
@@ -71,7 +78,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="navbar-end">
+		<div class="navbar-end {hidden ? 'hidden' : ''}">
 			<form method="post" action="?/logout">
 				<button class="link-warning">Sign out</button>
 			</form>
