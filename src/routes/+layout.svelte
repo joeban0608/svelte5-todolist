@@ -5,9 +5,9 @@
 
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 	const drizzleLinks = [
-		'/drizzle-relation/find-first',
-		'/drizzle-relation/find-many',
-		'/drizzle-relation/one-to-one'
+		'/drizzle-query/find-first',
+		'/drizzle-query/find-many',
+		'/drizzle-query/one-to-one'
 	];
 </script>
 
@@ -68,7 +68,6 @@
 					<details>
 						<summary>Drizzle Relation</summary>
 						<ul class="p-2">
-							<!-- <li><a href="/drizzle-relation">Drizzle Relation Example</a></li> -->
 							{@render drizzleLinkShadow(drizzleLinks)}
 						</ul>
 					</details>

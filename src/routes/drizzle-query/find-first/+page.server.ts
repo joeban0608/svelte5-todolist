@@ -1,12 +1,21 @@
 import * as auth from '$lib/server/auth';
-import type { PageServerLoad } from './$types';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
+import { globalDb } from '$lib/server/db';
+
 export const load = (async (event) => {
 	if (!event.locals.user) {
 		return redirect(302, '/demo/lucia/login');
 	}
-
-	return {};
+	try {
+		const result = await globalDb.query.user.findFirst();
+		return {
+			user: result
+		};
+	} catch (error) {
+		console.error('error', error);
+		return { error: 'query globalDb db was wrong.' };
+	}
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {

@@ -8,11 +8,7 @@ export const load = (async (event) => {
 		return redirect(302, '/demo/lucia/login');
 	}
 	try {
-		const result = await globalDb.query.user.findMany({
-			with: {
-				todo: true
-			}
-		});
+		const result = await globalDb.query.user.findMany();
 		return {
 			users: result
 		};
