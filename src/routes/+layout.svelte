@@ -50,7 +50,7 @@
 				>
 					<li><a href="/">Todo list</a></li>
 					<li class="">
-						<summary class="hover:cursor-default hover:bg-inherit">Drizzle Relation</summary>
+						<summary class="hover:cursor-default hover:bg-inherit">Drizzle Query</summary>
 					</li>
 					<li>
 						<ul class="p-2">
@@ -66,7 +66,7 @@
 				<li><a href="/">Todo list</a></li>
 				<li>
 					<details>
-						<summary>Drizzle Relation</summary>
+						<summary>Drizzle Query</summary>
 						<ul class="p-2">
 							{@render drizzleLinkShadow(drizzleLinks)}
 						</ul>
