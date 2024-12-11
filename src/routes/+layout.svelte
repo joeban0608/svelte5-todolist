@@ -27,7 +27,8 @@
 		'/drizzle-select/partial-select',
 		'/drizzle-select/conditional-select',
 		'/drizzle-select/distinct-select',
-		'/drizzle-select/advanced-select'
+		'/drizzle-select/advanced-select',
+		'/drizzle-select/filters'
 	];
 
 	const hidden = $derived(pageRoute === '/demo/lucia/login');
