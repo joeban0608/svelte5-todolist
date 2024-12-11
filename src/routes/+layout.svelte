@@ -10,7 +10,7 @@
 		pageRoute = value.route.id ?? '';
 	});
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
-	const drizzleLinks = [
+	const drizzleQueryLinks = [
 		'/drizzle-query/find-first',
 		'/drizzle-query/find-many',
 		'/drizzle-query/include-relations',
@@ -22,12 +22,20 @@
 		'/drizzle-query/include-custom-fields',
 		'/drizzle-query/prepared-statements'
 	];
+	const drizzleSelectLinks = ['/drizzle-select/basic-select'];
 
 	const hidden = $derived(pageRoute === '/demo/lucia/login');
 </script>
 
-{#snippet drizzleLinkShadow(drizzleLinks: string[])}
-	{#each drizzleLinks as link}
+{#snippet drizzleQueryLinkSnippet(links: string[])}
+	{#each links as link}
+		<li>
+			<a href={link}>{firstWordUpperCaseAndJoinSpace(link)}</a>
+		</li>
+	{/each}
+{/snippet}
+{#snippet drizzleSelectLinkSnippet(links: string[])}
+	{#each links as link}
 		<li>
 			<a href={link}>{firstWordUpperCaseAndJoinSpace(link)}</a>
 		</li>
@@ -57,12 +65,16 @@
 					class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
 				>
 					<li><a href="/">Todo list</a></li>
-					<li class="">
+					<li>
 						<summary class="hover:cursor-default hover:bg-inherit">Drizzle Query</summary>
+						<ul class="p-2">
+							{@render drizzleQueryLinkSnippet(drizzleQueryLinks)}
+						</ul>
 					</li>
 					<li>
+						<summary class="hover:cursor-default hover:bg-inherit">Drizzle Select</summary>
 						<ul class="p-2">
-							{@render drizzleLinkShadow(drizzleLinks)}
+							{@render drizzleQueryLinkSnippet(drizzleSelectLinks)}
 						</ul>
 					</li>
 				</ul>
@@ -76,7 +88,15 @@
 					<details>
 						<summary>Drizzle Query</summary>
 						<ul class="p-2">
-							{@render drizzleLinkShadow(drizzleLinks)}
+							{@render drizzleQueryLinkSnippet(drizzleQueryLinks)}
+						</ul>
+					</details>
+				</li>
+				<li>
+					<details>
+						<summary>Drizzle Select</summary>
+						<ul class="p-2">
+							{@render drizzleSelectLinkSnippet(drizzleSelectLinks)}
 						</ul>
 					</details>
 				</li>
