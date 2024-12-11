@@ -20,6 +20,7 @@
 		'/drizzle-query/limit--offset',
 		'/drizzle-query/order-by',
 		'/drizzle-query/include-custom-fields',
+		'/drizzle-query/prepared-statements'
 	];
 
 	const hidden = $derived(pageRoute === '/demo/lucia/login');
