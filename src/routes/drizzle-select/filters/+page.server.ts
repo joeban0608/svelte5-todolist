@@ -19,7 +19,6 @@ export const load = (async (event) => {
 		const query = db.select().from(user);
 		const todoExistsInUser = await db.select().from(todo).where(exists(query));
 		const todoNoExistsInUser = await db.select().from(todo).where(notExists(query));
-		console.log('todoNoExistsInUser', todoNoExistsInUser);
 		return {
 			todosEq,
 			todosNe,
