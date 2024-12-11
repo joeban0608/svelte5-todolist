@@ -26,7 +26,8 @@
 		'/drizzle-select/basic-select',
 		'/drizzle-select/partial-select',
 		'/drizzle-select/conditional-select',
-		'/drizzle-select/distinct-select'
+		'/drizzle-select/distinct-select',
+		'/drizzle-select/advanced-select'
 	];
 
 	const hidden = $derived(pageRoute === '/demo/lucia/login');
@@ -67,7 +68,7 @@
 					</svg>
 				</div>
 				<ul
-					class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+					class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
 				>
 					<li><a href="/">Todo list</a></li>
 					<li>
