@@ -22,7 +22,10 @@
 		'/drizzle-query/include-custom-fields',
 		'/drizzle-query/prepared-statements'
 	];
-	const drizzleSelectLinks = ['/drizzle-select/basic-select'];
+	const drizzleSelectLinks = [
+		'/drizzle-select/basic-select',
+		'/drizzle-select/partial-select',
+	];
 
 	const hidden = $derived(pageRoute === '/demo/lucia/login');
 </script>
