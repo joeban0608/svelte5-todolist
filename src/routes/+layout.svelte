@@ -25,7 +25,8 @@
 	const drizzleSelectLinks = [
 		'/drizzle-select/basic-select',
 		'/drizzle-select/partial-select',
-		'/drizzle-select/conditional-select'
+		'/drizzle-select/conditional-select',
+		'/drizzle-select/distinct-select'
 	];
 
 	const hidden = $derived(pageRoute === '/demo/lucia/login');
