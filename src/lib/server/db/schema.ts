@@ -4,7 +4,8 @@ import { pgTable, text, timestamp, serial, integer, type AnyPgColumn } from 'dri
 export const user = pgTable('user', {
 	id: text('id').primaryKey(),
 	username: text('username').notNull().unique(),
-	passwordHash: text('password_hash').notNull()
+	passwordHash: text('password_hash').notNull(),
+	age2: integer('age2').notNull().default(1)
 });
 export const usersRelations = relations(user, ({ one, many }) => ({
 	todo: many(todo)
