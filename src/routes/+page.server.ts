@@ -7,7 +7,7 @@ import * as auth from '$lib/server/auth';
 
 export const load = (async (event) => {
 	if (!event.locals.user) {
-		return redirect(302, '/demo/lucia/login');
+		return redirect(302, '/login');
 	}
 	const userId = event.locals.user.id;
 	const todos = await db.select().from(todo).where(eq(todo.userId, userId));
@@ -32,7 +32,7 @@ export const actions: Actions = {
 		await auth.invalidateSession(event.locals.session.id);
 		auth.deleteSessionTokenCookie(event);
 
-		return redirect(302, '/demo/lucia/login');
+		return redirect(302, '/login');
 	},
 	create: async ({ cookies, request }) => {
 		const data = await request.formData();

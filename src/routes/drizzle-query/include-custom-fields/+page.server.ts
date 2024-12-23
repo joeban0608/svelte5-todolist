@@ -7,7 +7,7 @@ import { todo, user } from '$lib/server/db/schema';
 
 export const load = (async (event) => {
 	if (!event.locals.user) {
-		return redirect(302, '/demo/lucia/login');
+		return redirect(302, '/login');
 	}
 	try {
 		const result = await globalDb.query.todo.findMany({
@@ -37,6 +37,6 @@ export const actions: Actions = {
 		await auth.invalidateSession(event.locals.session.id);
 		auth.deleteSessionTokenCookie(event);
 
-		return redirect(302, '/demo/lucia/login');
+		return redirect(302, '/login');
 	}
 };

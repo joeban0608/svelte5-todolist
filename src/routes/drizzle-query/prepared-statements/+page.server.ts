@@ -6,7 +6,7 @@ import { sql } from 'drizzle-orm';
 
 export const load = (async (event) => {
 	if (!event.locals.user) {
-		return redirect(302, '/demo/lucia/login');
+		return redirect(302, '/login');
 	}
 	try {
 		const p1 = await globalDb.query.user
@@ -35,6 +35,6 @@ export const actions: Actions = {
 		await auth.invalidateSession(event.locals.session.id);
 		auth.deleteSessionTokenCookie(event);
 
-		return redirect(302, '/demo/lucia/login');
+		return redirect(302, '/login');
 	}
 };

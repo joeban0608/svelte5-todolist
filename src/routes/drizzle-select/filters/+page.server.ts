@@ -7,7 +7,7 @@ import { eq, exists, gt, gte, lt, lte, ne, notExists } from 'drizzle-orm';
 
 export const load = (async (event) => {
 	if (!event.locals.user) {
-		return redirect(302, '/demo/lucia/login');
+		return redirect(302, '/login');
 	}
 	try {
 		const todosEq = await db.select().from(todo).where(eq(todo.id, 3));
@@ -43,6 +43,6 @@ export const actions: Actions = {
 		await auth.invalidateSession(event.locals.session.id);
 		auth.deleteSessionTokenCookie(event);
 
-		return redirect(302, '/demo/lucia/login');
+		return redirect(302, '/login');
 	}
 };

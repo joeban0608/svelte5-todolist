@@ -31,7 +31,7 @@
 		'/drizzle-select/filters'
 	];
 
-	const hidden = $derived(pageRoute === '/demo/lucia/login');
+	const hidden = $derived(pageRoute === '/login');
 </script>
 
 {#snippet drizzleQueryLinkSnippet(links: string[])}
